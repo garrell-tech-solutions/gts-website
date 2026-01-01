@@ -4,6 +4,9 @@
 
 This is a [Next.js](https://nextjs.org/), [Tailwind CSS](https://tailwindcss.com/) site created from the [Tailwind NextJS Starter Blog Template](https://github.com/timlrx/tailwind-nextjs-starter-blog). Version 2 of the template is based on Next App directory with [React Server Component](https://nextjs.org/docs/getting-started/react-essentials#server-components) and uses [Contentlayer](https://www.contentlayer.dev/) to manage markdown content.
 
+## Coffee
+Before you continue, consider [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/jeremygarr5)
+
 ## Features
 
 - Next.js with Typescript
