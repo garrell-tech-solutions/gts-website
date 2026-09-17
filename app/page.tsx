@@ -34,31 +34,22 @@ const jsonLd = {
   sameAs: ['https://www.linkedin.com/company/107989162/'],
 }
 
-// Set to the headshot path (e.g. '/static/images/jeremy-garrell.jpg') once it is uploaded.
-// While unset, the photo slot renders a placeholder in dev and is hidden in production.
-const HEADSHOT_SRC: string | null = null
-
 const CONSULT_URL = 'https://calendly.com/jeremy-garrell/30min'
 
-function HeroPhoto() {
-  if (!HEADSHOT_SRC && process.env.NODE_ENV === 'production') return null
+// Reuses the author avatar. Swap in a larger portrait here for a sharper hero.
+const HEADSHOT = { src: '/static/images/avatar.png', width: 255, height: 242 }
 
+function HeroPhoto() {
   return (
-    <div className="mx-auto w-full max-w-xs sm:max-w-sm lg:mx-0 lg:w-96 lg:max-w-none lg:shrink-0">
-      {HEADSHOT_SRC ? (
-        <Image
-          src={HEADSHOT_SRC}
-          alt="Jeremy Garrell, founder of Garrell Tech Solutions"
-          width={480}
-          height={600}
-          priority
-          className="border-t-gold aspect-[4/5] w-full rounded-lg border-t-4 object-cover"
-        />
-      ) : (
-        <div className="border-primary-800/30 dark:border-primary-300/30 text-primary-800/70 dark:text-primary-300/70 flex aspect-[4/5] w-full items-center justify-center rounded-lg border-2 border-dashed text-sm">
-          Headshot goes here (set HEADSHOT_SRC in app/page.tsx)
-        </div>
-      )}
+    <div className="mx-auto w-full max-w-60 lg:mx-0 lg:w-72 lg:max-w-none lg:shrink-0">
+      <Image
+        src={HEADSHOT.src}
+        alt="Jeremy Garrell, founder of Garrell Tech Solutions"
+        width={HEADSHOT.width}
+        height={HEADSHOT.height}
+        priority
+        className="border-t-gold h-auto w-full rounded-lg border-t-4"
+      />
     </div>
   )
 }
