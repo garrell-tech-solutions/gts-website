@@ -1,6 +1,6 @@
 import { genPageMetadata } from 'app/seo'
 import Image from '@/components/Image'
-import { KeyStats, SupportedOrgs } from '@/components/SocialProof'
+import { KeyStats, SupportedOrgs, type Stat } from '@/components/SocialProof'
 
 export const metadata = genPageMetadata({
   title: 'Custom Software and Fractional CTO Services',
@@ -32,6 +32,16 @@ const jsonLd = {
   },
   sameAs: ['https://www.linkedin.com/company/107989162/'],
 }
+
+// Commercial work on the first row, federal delivery on the second.
+const HOME_STATS: Stat[] = [
+  { value: '150', suffix: '+', label: 'Business customers on Callpurity' },
+  { value: '1M', suffix: '+', label: 'Phone numbers managed across 50 states' },
+  { value: '7', label: 'Person team led as fractional CTO' },
+  { value: '10', suffix: '+', label: 'Years of federal software delivery' },
+  { value: '3', label: 'Federal customers: FBI, Army, USMC' },
+  { value: '3', label: 'Federal legacy systems modernized' },
+]
 
 const CONSULT_URL = 'https://calendly.com/jeremy-garrell/30min'
 
@@ -99,7 +109,7 @@ export default function HomePage() {
         </section>
 
         {/* Social proof */}
-        <KeyStats />
+        <KeyStats stats={HOME_STATS} />
         <SupportedOrgs />
       </div>
     </>

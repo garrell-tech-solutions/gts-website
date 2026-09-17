@@ -98,7 +98,20 @@ const SUPPORTED_ORGS = [
   { key: 'php', icon: <HealthIcon />, name: 'Pro Health Partners' },
 ]
 
-export function KeyStats() {
+export type Stat = { value: string; suffix?: string; label: string }
+
+const CAPABILITY_STATS: Stat[] = [
+  { value: '10', suffix: '+', label: 'Years of federal software delivery' },
+  { value: '3', label: 'Federal customers — FBI · Army · USMC' },
+  { value: '3', label: 'Legacy systems modernized' },
+  { value: '150', suffix: '+', label: 'Businesses served on Callpurity SaaS' },
+  { value: '1M', suffix: '+', label: 'Records managed across 50 states' },
+]
+
+export function KeyStats({ stats = CAPABILITY_STATS }: { stats?: Stat[] }) {
+  // Six stats read as two rows of three; five fit on one row.
+  const columns = stats.length === 6 ? 'sm:grid-cols-3 sm:gap-y-8' : 'sm:grid-cols-5'
+
   return (
     <section
       aria-label="Key figures"
@@ -107,12 +120,10 @@ export function KeyStats() {
       <p className="text-primary-800/70 dark:text-primary-300/70 mb-4 text-center text-sm font-semibold tracking-[0.2em] uppercase sm:text-base">
         Track Record
       </p>
-      <div className="grid grid-cols-2 gap-6 sm:grid-cols-5 sm:gap-4">
-        <StatBlock value="10" suffix="+" label="Years of federal software delivery" />
-        <StatBlock value="3" label="Federal customers — FBI · Army · USMC" />
-        <StatBlock value="3" label="Legacy systems modernized" />
-        <StatBlock value="150" suffix="+" label="Businesses served on Callpurity SaaS" />
-        <StatBlock value="1M" suffix="+" label="Records managed across 50 states" />
+      <div className={`grid grid-cols-2 gap-6 sm:gap-4 ${columns}`}>
+        {stats.map((stat) => (
+          <StatBlock key={stat.label} {...stat} />
+        ))}
       </div>
     </section>
   )
