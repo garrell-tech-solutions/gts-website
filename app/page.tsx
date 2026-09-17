@@ -36,19 +36,19 @@ const jsonLd = {
 
 const CONSULT_URL = 'https://calendly.com/jeremy-garrell/30min'
 
-// Reuses the author avatar. Swap in a larger portrait here for a sharper hero.
-const HEADSHOT = { src: '/static/images/avatar.png', width: 255, height: 242 }
+// Author avatar with the background removed. Swap in a larger cut-out for a sharper hero.
+const HEADSHOT = { src: '/static/images/jeremy-cutout.png', width: 255, height: 201 }
 
 function HeroPhoto() {
   return (
-    <div className="mx-auto w-full max-w-60 lg:mx-0 lg:w-72 lg:max-w-none lg:shrink-0">
+    <div className="bg-mint h-32 w-32 shrink-0 overflow-hidden rounded-full lg:mx-0 lg:h-48 lg:w-48 dark:bg-gray-900">
       <Image
         src={HEADSHOT.src}
         alt="Jeremy Garrell, founder of Garrell Tech Solutions"
         width={HEADSHOT.width}
         height={HEADSHOT.height}
         priority
-        className="border-t-gold h-auto w-full rounded-lg border-t-4"
+        className="h-full w-full object-cover object-top pt-3"
       />
     </div>
   )
@@ -66,7 +66,7 @@ export default function HomePage() {
         {/* Hero */}
         <section
           aria-labelledby="hero-heading"
-          className="flex flex-col-reverse gap-10 pt-6 pb-12 sm:pt-10 sm:pb-16 lg:flex-row lg:items-center lg:gap-16"
+          className="flex flex-col-reverse gap-6 pt-6 pb-12 sm:pt-10 sm:pb-16 lg:flex-row lg:items-center lg:gap-16"
         >
           <div className="lg:flex-1">
             <h1
