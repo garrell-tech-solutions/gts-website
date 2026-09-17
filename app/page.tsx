@@ -46,12 +46,12 @@ const HOME_STATS: Stat[] = [
 const CONSULT_URL = 'https://calendly.com/jeremy-garrell/30min'
 
 // Author avatar with the background removed. Shown small, as a byline next to the CTA.
-const HEADSHOT = { src: '/static/images/jeremy-cutout.png', width: 112, height: 88 }
+const HEADSHOT = { src: '/static/images/jeremy-cutout.png', width: 144, height: 114 }
 
 function ConsultByline() {
   return (
     <div className="flex items-center gap-3">
-      <div className="bg-mint h-14 w-14 shrink-0 overflow-hidden rounded-full dark:bg-gray-800">
+      <div className="bg-mint h-18 w-18 shrink-0 overflow-hidden rounded-full dark:bg-gray-800">
         <Image
           src={HEADSHOT.src}
           alt="Jeremy Garrell"
