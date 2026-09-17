@@ -5,7 +5,7 @@ import { KeyStats, SupportedOrgs } from '@/components/SocialProof'
 export const metadata = genPageMetadata({
   title: 'Custom Software and Fractional CTO Services',
   description:
-    'Garrell Tech Solutions turns business requirements into working software, with senior product ownership and engineering from the first requirements conversation to software in production.',
+    'Garrell Tech Solutions turns business requirements into working software, with technical leadership when you need it and no full-time CTO hire.',
 })
 
 const jsonLd = {
@@ -83,8 +83,7 @@ export default function HomePage() {
           </h1>
           <div className="bg-gold mx-auto mt-6 h-px w-12" />
           <p className="mt-6 text-lg text-balance text-gray-600 sm:text-xl dark:text-gray-400">
-            Senior product ownership and engineering for growing businesses, from the first
-            requirements conversation to software in production.
+            Technical leadership when you need it, without hiring a full-time CTO.
           </p>
           <div className="mt-16 flex flex-col items-center gap-5 sm:flex-row sm:justify-center sm:gap-6">
             <a
