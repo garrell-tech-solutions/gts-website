@@ -5,7 +5,7 @@ import { KeyStats, SupportedOrgs } from '@/components/SocialProof'
 export const metadata = genPageMetadata({
   title: 'Custom Software and Fractional CTO Services',
   description:
-    'Garrell Tech Solutions turns business requirements into working software. Senior product ownership and engineering for growing businesses, proven on FBI and Army programs.',
+    'Garrell Tech Solutions turns business requirements into working software, with senior product ownership and engineering from the first requirements conversation to software in production.',
 })
 
 const jsonLd = {
@@ -36,12 +36,12 @@ const jsonLd = {
 const CONSULT_URL = 'https://calendly.com/jeremy-garrell/30min'
 
 // Author avatar with the background removed. Shown small, as a byline next to the CTA.
-const HEADSHOT = { src: '/static/images/jeremy-cutout.png', width: 88, height: 69 }
+const HEADSHOT = { src: '/static/images/jeremy-cutout.png', width: 112, height: 88 }
 
 function ConsultByline() {
   return (
     <div className="flex items-center gap-3">
-      <div className="bg-mint h-11 w-11 shrink-0 overflow-hidden rounded-full dark:bg-gray-800">
+      <div className="bg-mint h-14 w-14 shrink-0 overflow-hidden rounded-full dark:bg-gray-800">
         <Image
           src={HEADSHOT.src}
           alt="Jeremy Garrell"
@@ -83,8 +83,8 @@ export default function HomePage() {
           </h1>
           <div className="bg-gold mx-auto mt-6 h-px w-12" />
           <p className="mt-6 text-lg text-balance text-gray-600 sm:text-xl dark:text-gray-400">
-            Senior product ownership and engineering for growing businesses, backed by a decade of
-            delivery on FBI and Army programs.
+            Senior product ownership and engineering for growing businesses, from the first
+            requirements conversation to software in production.
           </p>
           <div className="mt-16 flex flex-col items-center gap-5 sm:flex-row sm:justify-center sm:gap-6">
             <a
