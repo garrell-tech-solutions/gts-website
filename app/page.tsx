@@ -45,28 +45,36 @@ const HOME_STATS: Stat[] = [
 
 const CONSULT_URL = 'https://calendly.com/jeremy-garrell/30min'
 
-// Author avatar with the background removed. Shown small, as a byline next to the CTA.
-const HEADSHOT = { src: '/static/images/jeremy-cutout.png', width: 144, height: 114 }
+// Author avatar with the background removed. A higher-resolution cut-out would sharpen the card.
+const HEADSHOT = { src: '/static/images/jeremy-cutout.png', width: 255, height: 201 }
 
-function ConsultByline() {
+function FounderCard() {
   return (
-    <div className="flex items-center gap-3">
-      <div className="bg-mint h-18 w-18 shrink-0 overflow-hidden rounded-full dark:bg-gray-800">
+    <div className="border-t-gold mx-auto mt-12 flex max-w-2xl flex-col items-center gap-6 rounded-lg border border-t-4 border-gray-200 bg-white p-4 sm:flex-row sm:gap-8 sm:p-8 sm:text-left dark:border-gray-800 dark:bg-gray-950">
+      <div className="bg-mint h-32 w-32 shrink-0 overflow-hidden rounded-full sm:h-36 sm:w-36 dark:bg-gray-800">
         <Image
           src={HEADSHOT.src}
           alt="Jeremy Garrell"
           width={HEADSHOT.width}
           height={HEADSHOT.height}
           priority
-          className="h-full w-full object-cover object-top pt-0.5"
+          className="h-full w-full object-cover object-top pt-2"
         />
       </div>
-      <p className="text-left text-sm leading-snug text-gray-600 dark:text-gray-400">
-        You&rsquo;ll talk with{' '}
-        <span className="font-semibold text-gray-900 dark:text-gray-100">Jeremy Garrell</span>
-        <br />
-        Founder and principal engineer
-      </p>
+      <div className="flex w-full flex-col gap-1.5">
+        <p className="text-xl font-bold text-gray-900 dark:text-gray-100">Jeremy Garrell</p>
+        <p className="text-gray-600 dark:text-gray-400">
+          Founder and principal engineer. You&rsquo;ll talk with me directly.
+        </p>
+        <a
+          href={CONSULT_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-gold text-primary-900 hover:bg-gold/90 mt-4 block rounded-md px-4 py-4 text-center text-base font-semibold shadow-sm transition-colors duration-200 sm:self-start sm:px-7"
+        >
+          Scope your project in a 30-min call
+        </a>
+      </div>
     </div>
   )
 }
@@ -95,17 +103,7 @@ export default function HomePage() {
           <p className="mt-6 text-lg text-balance text-gray-600 sm:text-xl dark:text-gray-400">
             Technical leadership when you need it, without hiring a full-time CTO.
           </p>
-          <div className="mt-16 flex flex-col items-center gap-5 sm:flex-row sm:justify-center sm:gap-6">
-            <a
-              href={CONSULT_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-gold text-primary-900 hover:bg-gold/90 block w-full rounded-md px-8 py-4 text-center text-base font-semibold shadow-sm transition-colors duration-200 sm:w-auto"
-            >
-              Scope your project in a 30-min call
-            </a>
-            <ConsultByline />
-          </div>
+          <FounderCard />
         </section>
 
         {/* Social proof */}
