@@ -165,7 +165,7 @@ function ConsentFormCard({ sample = false }: { sample?: boolean }) {
           I consent to receive these SMS alerts at the number above.
         </p>
 
-        <p className="flex gap-8">
+        <p className="flex flex-wrap gap-x-8 gap-y-2">
           <span>
             Signature:{' '}
             {sample ? (

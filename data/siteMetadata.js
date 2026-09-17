@@ -7,11 +7,11 @@ const siteMetadata = {
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://garrellts.com',
-  siteRepo: 'https://github.com/garrelj1/garrell-tech-solutions',
+  siteRepo: 'https://github.com/garrell-tech-solutions/gts-website',
   siteLogo: `${process.env.BASE_PATH || ''}/static/images/logo.png`,
   socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.png`,
   email: 'jeremy@garrellts.com',
-  github: 'https://github.com/garrelj1',
+  github: 'https://github.com/garrell-tech-solutions',
   x: 'https://twitter.com/x',
   // twitter: 'https://twitter.com/Twitter',
   facebook: 'https://facebook.com',

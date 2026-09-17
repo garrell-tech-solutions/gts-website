@@ -1,0 +1,367 @@
+import { genPageMetadata } from 'app/seo'
+import { KeyStats, SupportedOrgs } from '@/components/SocialProof'
+
+export const metadata = genPageMetadata({
+  title: 'Capability Statement: Federal Software Delivery, Cloud to Tactical Edge',
+  description:
+    'Garrell Tech Solutions is a small-business federal software consultancy: custom application development, cloud migration, and legacy modernization for federal primes and agencies. Proven on FBI CJIS, N-DEx, and Army/USMC programs.',
+})
+
+const PRIMARY = 'text-primary-800 dark:text-primary-300'
+
+function SectionHeading({ children, id }: { children: React.ReactNode; id: string }) {
+  return (
+    <div className="mb-5">
+      <h2
+        id={id}
+        className={`text-xs font-semibold tracking-[0.2em] uppercase sm:text-sm ${PRIMARY}`}
+      >
+        {children}
+      </h2>
+      <div className="bg-gold mt-2 h-px w-12" />
+    </div>
+  )
+}
+
+function MintPanel({
+  children,
+  className = '',
+}: {
+  children: React.ReactNode
+  className?: string
+}) {
+  return (
+    <div
+      className={`bg-mint border-gold dark:border-gold rounded-lg border-t-4 p-5 sm:p-6 dark:bg-gray-900 ${className}`}
+    >
+      {children}
+    </div>
+  )
+}
+
+function DifferentiatorItem({ lead, body }: { lead: string; body: string }) {
+  return (
+    <li className="border-gold/70 border-l-2 pl-4">
+      <span className="font-semibold text-gray-900 dark:text-gray-100">{lead}</span>{' '}
+      <span className="text-gray-700 dark:text-gray-300">{body}</span>
+    </li>
+  )
+}
+
+function EngagementItem({ title, meta, body }: { title: string; meta?: string; body: string }) {
+  return (
+    <div>
+      <h4 className="font-semibold text-gray-900 dark:text-gray-100">
+        {title}
+        {meta && <span className="font-normal text-gray-500 dark:text-gray-400"> — {meta}</span>}
+      </h4>
+      <p className="mt-1 text-gray-600 dark:text-gray-400">{body}</p>
+    </div>
+  )
+}
+
+function CompanyDataRow({ label, value }: { label: string; value: React.ReactNode }) {
+  return (
+    <div className="flex flex-col gap-1 py-2 sm:flex-row sm:gap-6">
+      <dt className="w-full text-xs font-semibold tracking-wide text-gray-600 uppercase sm:w-40 sm:shrink-0 dark:text-gray-400">
+        {label}
+      </dt>
+      <dd className="text-gray-900 dark:text-gray-100">{value}</dd>
+    </div>
+  )
+}
+
+export default function CapabilityStatementPage() {
+  return (
+    <>
+      <div className="xl:mx-[-4rem] xl:w-[calc(100%+8rem)]">
+        {/* Hero */}
+        <section aria-labelledby="hero-heading" className="pt-6 pb-8 sm:pt-8 sm:pb-10">
+          <p className={`text-xs font-semibold tracking-[0.25em] uppercase sm:text-sm ${PRIMARY}`}>
+            Capability Statement · Federal Software Delivery
+          </p>
+          <div className="mt-3 flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
+            <div>
+              <h1
+                id="hero-heading"
+                className="text-4xl leading-tight font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-6xl dark:text-gray-100"
+              >
+                Garrell Tech Solutions LLC
+              </h1>
+              <p className="mt-3 max-w-xl text-lg font-medium text-gray-600 sm:text-xl dark:text-gray-400">
+                Product ownership that turns business requirements into working software.
+              </p>
+            </div>
+            <div className="border-t-gold w-full shrink-0 rounded-lg border border-t-4 border-gray-200 bg-white p-5 lg:w-auto lg:min-w-[16rem] dark:border-gray-800 dark:bg-gray-950">
+              <dl className="space-y-2 text-sm">
+                <div className="flex items-baseline gap-2">
+                  <dt className="w-12 shrink-0 text-xs font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
+                    Email
+                  </dt>
+                  <dd className="min-w-0 break-words">
+                    <a
+                      href="mailto:jeremy@garrellts.com"
+                      className={`font-semibold hover:underline ${PRIMARY}`}
+                    >
+                      jeremy@garrellts.com
+                    </a>
+                  </dd>
+                </div>
+                <div className="flex items-baseline gap-2">
+                  <dt className="w-12 shrink-0 text-xs font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
+                    Phone
+                  </dt>
+                  <dd>
+                    <a
+                      href="tel:+12014007782"
+                      className="text-gray-700 hover:underline dark:text-gray-300"
+                    >
+                      (201) 400-7782
+                    </a>
+                  </dd>
+                </div>
+              </dl>
+              <a
+                href="https://calendly.com/jeremy-garrell/30min"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-gold text-primary-900 hover:bg-gold/90 mt-4 block rounded-md px-4 py-3 text-center text-sm font-semibold transition-colors duration-200"
+              >
+                Book a 30-min call →
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <KeyStats />
+        <SupportedOrgs />
+
+        {/* Company overview */}
+        <section aria-labelledby="overview-heading" className="py-8">
+          <SectionHeading id="overview-heading">Company Overview</SectionHeading>
+          <p className="text-lg leading-8 text-gray-600 dark:text-gray-400">
+            Founded in November 2024, Garrell Tech Solutions LLC is built around a decade of
+            hands-on delivery its principal has logged across defense and federal law-enforcement
+            programs. The firm modernizes legacy systems and retires costly licenses (on-prem ETL →
+            AWS GovCloud; Micro Focus IDOL → OpenSearch), delivers as a single vendor from cloud
+            back-end to embedded tactical edge, and applies product-owner discipline that turns
+            stakeholder needs into shipped software. Proven on the FBI CJIS mission in 2022–2024 and
+            brought back to it in 2025.
+          </p>
+        </section>
+
+        {/* Core competencies */}
+        <section aria-labelledby="competencies-heading" className="py-8">
+          <SectionHeading id="competencies-heading">Core Competencies</SectionHeading>
+          <ul className="grid list-disc gap-x-8 gap-y-3 pl-5 text-gray-700 sm:grid-cols-2 dark:text-gray-300">
+            <li>Custom application development (web & mobile)</li>
+            <li>Cloud engineering & migration (AWS / GovCloud)</li>
+            <li>Legacy modernization & on-prem-to-cloud migration</li>
+            <li>Microservices & high-throughput data pipelines</li>
+            <li>Enterprise search (OpenSearch / Elasticsearch)</li>
+            <li>Android, embedded & tactical-edge software</li>
+            <li>DevSecOps & CI/CD automation</li>
+            <li>Product ownership & technical team leadership</li>
+          </ul>
+        </section>
+
+        {/* Differentiators */}
+        <section aria-labelledby="differentiators-heading" className="py-8">
+          <SectionHeading id="differentiators-heading">Differentiators</SectionHeading>
+          <MintPanel>
+            <ul className="grid gap-4 sm:grid-cols-2">
+              <DifferentiatorItem
+                lead="Product ownership, end to end —"
+                body="turns business requirements into shipped software, cutting requirements-translation overhead."
+              />
+              <DifferentiatorItem
+                lead="Lower delivery risk —"
+                body="proven on the FBI CJIS mission (2022–2024) and brought back to it in 2025."
+              />
+              <DifferentiatorItem
+                lead="One vendor, cloud to edge —"
+                body="AWS / GovCloud back-end through embedded tactical software; fewer integration seams."
+              />
+              <DifferentiatorItem
+                lead="Modernization that cuts cost —"
+                body="retires legacy systems & licenses (on-prem ETL → GovCloud; IDOL → OpenSearch)."
+              />
+              <DifferentiatorItem
+                lead="Senior talent, small-business rates —"
+                body="principal-level delivery without integrator overhead."
+              />
+            </ul>
+          </MintPanel>
+        </section>
+
+        {/* Program experience */}
+        <section aria-labelledby="experience-heading" className="py-8">
+          <SectionHeading id="experience-heading">Past Performance</SectionHeading>
+
+          <h3 className="text-sm font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
+            Company Engagements
+          </h3>
+          <div className="mt-3 space-y-4">
+            <EngagementItem
+              title="FBI CJIS — Contract Software Engineer"
+              meta="via Fusion Technology · Jul 2025 – Present"
+              body="Application-development and cloud engineering services to the FBI Criminal Justice Information Services Division, delivered through Fusion Technology."
+            />
+            <EngagementItem
+              title="Callpurity — B2B SaaS Platform"
+              meta="Fractional CTO, contractor engagement via GTS · Current"
+              body="Serving as contractor CTO, leading a 7-person team (four engineers, a designer, two contractors) building a B2B SaaS platform serving 150+ business customers and hundreds of users, with 1M+ phone numbers under management across all 50 states."
+            />
+          </div>
+
+          <h3 className="mt-6 text-sm font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
+            Principal&rsquo;s Federal Program Experience
+          </h3>
+          <div className="mt-3 space-y-4">
+            <EngagementItem
+              title="FBI N-DEx Modernization"
+              meta="via ManTech / Fusion Technology, 2022–2024"
+              body="Supported modernization of the FBI's National Data Exchange (N-DEx): built AWS microservices for a high-throughput data-ingest pipeline, migrated an on-prem ETL pipeline to AWS GovCloud, and moved enterprise search from Micro Focus IDOL to OpenSearch."
+            />
+            <EngagementItem
+              title="U.S. Army & USMC, Picatinny Arsenal"
+              meta="via Parsons & Decilog"
+              body="Led Android modernization of a mortar fire-control system; delivered fire-control application suites and single-board-computer Linux BSP support for new hardware."
+            />
+            <EngagementItem
+              title="U.S. Army RF Systems"
+              meta="via Booz Allen Hamilton"
+              body="Developed Android software to interface with and visualize data from an RF detection system."
+            />
+          </div>
+          <p className="mt-4 text-sm text-gray-500 italic dark:text-gray-400">
+            Principal&rsquo;s program experience delivered under prior prime contractors, not
+            contracts held by Garrell Tech Solutions LLC.
+          </p>
+        </section>
+
+        {/* Core technologies */}
+        <section aria-labelledby="tech-heading" className="py-8">
+          <SectionHeading id="tech-heading">Core Technologies</SectionHeading>
+          <dl className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div>
+              <dt className="text-xs font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
+                Languages
+              </dt>
+              <dd className="mt-1 text-gray-700 dark:text-gray-300">
+                Java, Kotlin, Python, TypeScript, JavaScript, Rust, C, SQL
+              </dd>
+            </div>
+            <div>
+              <dt className="text-xs font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
+                AWS
+              </dt>
+              <dd className="mt-1 text-gray-700 dark:text-gray-300">
+                EC2, S3, RDS, Lambda, SAM, CDK, CloudFormation, ECS, SQS, CloudWatch, CloudTrail
+              </dd>
+            </div>
+            <div>
+              <dt className="text-xs font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
+                Frontend & Mobile
+              </dt>
+              <dd className="mt-1 text-gray-700 dark:text-gray-300">
+                React, Next.js, Android/AOSP
+              </dd>
+            </div>
+            <div>
+              <dt className="text-xs font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
+                Backend & Data
+              </dt>
+              <dd className="mt-1 text-gray-700 dark:text-gray-300">
+                Spring, RESTful services, OpenSearch, PostgreSQL, Supabase, Linux
+              </dd>
+            </div>
+            <div>
+              <dt className="text-xs font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
+                Tooling
+              </dt>
+              <dd className="mt-1 text-gray-700 dark:text-gray-300">
+                Git, GitHub Actions, Jira, Bitbucket, Bamboo, Maven, Gradle, Docker
+              </dd>
+            </div>
+          </dl>
+        </section>
+
+        {/* Company data & contact */}
+        <div className="grid gap-8 py-8 lg:grid-cols-2">
+          <section aria-labelledby="company-data-heading" className="flex flex-col">
+            <SectionHeading id="company-data-heading">Company Data</SectionHeading>
+            <MintPanel className="flex-1">
+              <dl className="divide-y divide-gray-900/10 dark:divide-gray-100/10">
+                <CompanyDataRow label="Legal Entity" value="Garrell Tech Solutions LLC" />
+                <CompanyDataRow label="Founded" value="November 2024" />
+                <CompanyDataRow label="UEI" value="GG32V7Y6B1A2" />
+                <CompanyDataRow label="CAGE / NCAGE" value="20E53" />
+                <CompanyDataRow
+                  label="NAICS Codes"
+                  value={
+                    <ul className="space-y-1">
+                      <li>541511 · Custom Computer Programming</li>
+                      <li>541512 · Computer Systems Design</li>
+                      <li>541519 · Other Computer Related Services</li>
+                    </ul>
+                  }
+                />
+                <CompanyDataRow label="Certifications" value="Small Business (SB)" />
+                <CompanyDataRow label="Delivery Model" value="Remote — nationwide, all 50 states" />
+              </dl>
+            </MintPanel>
+          </section>
+
+          <section aria-labelledby="contact-heading" className="flex flex-col">
+            <SectionHeading id="contact-heading">Contact</SectionHeading>
+            <MintPanel className="flex flex-1 flex-col">
+              <p className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                Jeremy Garrell
+              </p>
+              <p className="text-gray-600 dark:text-gray-400">Founder & Principal Engineer</p>
+              <dl className="mt-3 space-y-1.5">
+                <div className="flex gap-2">
+                  <dt className="text-gray-600 dark:text-gray-400">Email</dt>
+                  <dd>
+                    <a href="mailto:jeremy@garrellts.com" className={`hover:underline ${PRIMARY}`}>
+                      jeremy@garrellts.com
+                    </a>
+                  </dd>
+                </div>
+                <div className="flex gap-2">
+                  <dt className="text-gray-600 dark:text-gray-400">Phone</dt>
+                  <dd>
+                    <a href="tel:+12014007782" className={`hover:underline ${PRIMARY}`}>
+                      (201) 400-7782
+                    </a>
+                  </dd>
+                </div>
+                <div className="flex gap-2">
+                  <dt className="text-gray-600 dark:text-gray-400">Location</dt>
+                  <dd className="text-gray-900 dark:text-gray-100">Coral Springs, FL 33065</dd>
+                </div>
+                <div className="flex gap-2">
+                  <dt className="text-gray-600 dark:text-gray-400">Web</dt>
+                  <dd>
+                    <a href="https://garrellts.com" className={`hover:underline ${PRIMARY}`}>
+                      garrellts.com
+                    </a>
+                  </dd>
+                </div>
+              </dl>
+              <a
+                href="https://calendly.com/jeremy-garrell/30min"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-gold text-primary-900 hover:bg-gold/90 mt-5 inline-block self-start rounded-md px-5 py-3 text-center text-sm font-semibold transition-colors duration-200 lg:mt-auto"
+              >
+                Book a 30-Minute Call
+              </a>
+            </MintPanel>
+          </section>
+        </div>
+      </div>
+    </>
+  )
+}

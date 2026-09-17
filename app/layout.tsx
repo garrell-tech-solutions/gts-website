@@ -92,10 +92,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="bg-white pl-[calc(100vw-100%)] text-black antialiased dark:bg-gray-950 dark:text-white">
         <ThemeProviders>
           <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
+          <a
+            href="#main-content"
+            className="bg-gold text-primary-900 sr-only z-100 rounded-md px-4 py-2 font-semibold focus:not-sr-only focus:fixed focus:top-4 focus:left-4"
+          >
+            Skip to content
+          </a>
           <SectionContainer>
             <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
               <Header />
-              <main className="mb-auto">{children}</main>
+              <main id="main-content" tabIndex={-1} className="mb-auto focus:outline-none">
+                {children}
+              </main>
             </SearchProvider>
             <Footer />
           </SectionContainer>
