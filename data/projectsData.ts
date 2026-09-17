@@ -7,6 +7,12 @@ interface Project {
 
 const projectsData: Project[] = [
   {
+    title: 'Splitbench',
+    description: `Give it any topic. One AI argues for it, the other against, and neither is allowed to back down. A third AI judges who argued it better.`,
+    imgSrc: '/static/images/splitbench-og.png',
+    href: 'https://splitbench.com/',
+  },
+  {
     title: 'Open Source Predictive Dialer',
     description: `Join my journey learning predictive dialers by building one`,
     imgSrc: '/static/images/gts-dialer.png',
