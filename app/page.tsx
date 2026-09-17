@@ -1,6 +1,5 @@
 import { genPageMetadata } from 'app/seo'
 import Image from '@/components/Image'
-import Link from '@/components/Link'
 import { KeyStats, SupportedOrgs } from '@/components/SocialProof'
 
 export const metadata = genPageMetadata({
@@ -36,20 +35,28 @@ const jsonLd = {
 
 const CONSULT_URL = 'https://calendly.com/jeremy-garrell/30min'
 
-// Author avatar with the background removed. Swap in a larger cut-out for a sharper hero.
-const HEADSHOT = { src: '/static/images/jeremy-cutout.png', width: 255, height: 201 }
+// Author avatar with the background removed. Shown small, as a byline next to the CTA.
+const HEADSHOT = { src: '/static/images/jeremy-cutout.png', width: 88, height: 69 }
 
-function HeroPhoto() {
+function ConsultByline() {
   return (
-    <div className="bg-mint h-32 w-32 shrink-0 overflow-hidden rounded-full lg:mx-0 lg:h-48 lg:w-48 dark:bg-gray-900">
-      <Image
-        src={HEADSHOT.src}
-        alt="Jeremy Garrell, founder of Garrell Tech Solutions"
-        width={HEADSHOT.width}
-        height={HEADSHOT.height}
-        priority
-        className="h-full w-full object-cover object-top pt-3"
-      />
+    <div className="flex items-center gap-3">
+      <div className="bg-mint h-11 w-11 shrink-0 overflow-hidden rounded-full dark:bg-gray-800">
+        <Image
+          src={HEADSHOT.src}
+          alt="Jeremy Garrell"
+          width={HEADSHOT.width}
+          height={HEADSHOT.height}
+          priority
+          className="h-full w-full object-cover object-top pt-0.5"
+        />
+      </div>
+      <p className="text-left text-sm leading-snug text-gray-600 dark:text-gray-400">
+        You&rsquo;ll talk with{' '}
+        <span className="font-semibold text-gray-900 dark:text-gray-100">Jeremy Garrell</span>
+        <br />
+        Founder and principal engineer
+      </p>
     </div>
   )
 }
@@ -66,39 +73,30 @@ export default function HomePage() {
         {/* Hero */}
         <section
           aria-labelledby="hero-heading"
-          className="flex flex-col-reverse gap-6 pt-6 pb-12 sm:pt-10 sm:pb-16 lg:flex-row lg:items-center lg:gap-16"
+          className="pt-6 pb-12 text-center sm:pt-10 sm:pb-16"
         >
-          <div className="lg:flex-1">
-            <h1
-              id="hero-heading"
-              className="max-w-2xl text-3xl leading-tight font-extrabold tracking-tight text-gray-900 sm:text-4xl md:text-5xl dark:text-gray-100"
-            >
-              Your business requirements, shipped as working software.
-            </h1>
-            <div className="bg-gold mt-6 h-px w-12" />
-            <p className="mt-6 max-w-xl text-lg text-gray-600 sm:text-xl dark:text-gray-400">
-              Senior product ownership and engineering for growing businesses, backed by a decade of
-              delivery on FBI and Army programs.
-            </p>
+          <h1
+            id="hero-heading"
+            className="text-3xl leading-tight font-extrabold tracking-tight text-balance text-gray-900 sm:text-4xl md:text-5xl dark:text-gray-100"
+          >
+            Your business requirements, shipped as working software.
+          </h1>
+          <div className="bg-gold mx-auto mt-6 h-px w-12" />
+          <p className="mt-6 text-lg text-balance text-gray-600 sm:text-xl dark:text-gray-400">
+            Senior product ownership and engineering for growing businesses, backed by a decade of
+            delivery on FBI and Army programs.
+          </p>
+          <div className="mt-16 flex flex-col items-center gap-5 sm:flex-row sm:justify-center sm:gap-6">
             <a
               href={CONSULT_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-gold text-primary-900 hover:bg-gold/90 mt-12 block rounded-md px-8 py-4 text-center text-base font-semibold shadow-sm transition-colors duration-200 sm:inline-block"
+              className="bg-gold text-primary-900 hover:bg-gold/90 block w-full rounded-md px-8 py-4 text-center text-base font-semibold shadow-sm transition-colors duration-200 sm:w-auto"
             >
-              Book a 30-min call →
+              Scope your project in a 30-min call
             </a>
-            <p className="mt-12 text-sm text-gray-500 dark:text-gray-400">
-              Federal buyer?{' '}
-              <Link
-                href="/capability-statement"
-                className="text-primary-800 dark:text-primary-300 font-medium hover:underline"
-              >
-                View the capability statement
-              </Link>
-            </p>
+            <ConsultByline />
           </div>
-          <HeroPhoto />
         </section>
 
         {/* Social proof */}
