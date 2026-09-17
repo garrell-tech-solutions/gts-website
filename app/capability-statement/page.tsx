@@ -63,7 +63,7 @@ function EngagementItem({ title, meta, body }: { title: string; meta?: string; b
 function CompanyDataRow({ label, value }: { label: string; value: React.ReactNode }) {
   return (
     <div className="flex flex-col gap-1 py-2 sm:flex-row sm:gap-6">
-      <dt className="w-full text-xs font-semibold tracking-wide text-gray-500 uppercase sm:w-40 sm:shrink-0 dark:text-gray-400">
+      <dt className="w-full text-xs font-semibold tracking-wide text-gray-600 uppercase sm:w-40 sm:shrink-0 dark:text-gray-400">
         {label}
       </dt>
       <dd className="text-gray-900 dark:text-gray-100">{value}</dd>
@@ -319,10 +319,10 @@ export default function CapabilityStatementPage() {
               <p className="text-lg font-semibold text-gray-900 dark:text-gray-100">
                 Jeremy Garrell
               </p>
-              <p className="text-gray-500 dark:text-gray-400">Founder & Principal Engineer</p>
+              <p className="text-gray-600 dark:text-gray-400">Founder & Principal Engineer</p>
               <dl className="mt-3 space-y-1.5">
                 <div className="flex gap-2">
-                  <dt className="text-gray-500 dark:text-gray-400">Email</dt>
+                  <dt className="text-gray-600 dark:text-gray-400">Email</dt>
                   <dd>
                     <a href="mailto:jeremy@garrellts.com" className={`hover:underline ${PRIMARY}`}>
                       jeremy@garrellts.com
@@ -330,7 +330,7 @@ export default function CapabilityStatementPage() {
                   </dd>
                 </div>
                 <div className="flex gap-2">
-                  <dt className="text-gray-500 dark:text-gray-400">Phone</dt>
+                  <dt className="text-gray-600 dark:text-gray-400">Phone</dt>
                   <dd>
                     <a href="tel:+12014007782" className={`hover:underline ${PRIMARY}`}>
                       (201) 400-7782
@@ -338,11 +338,11 @@ export default function CapabilityStatementPage() {
                   </dd>
                 </div>
                 <div className="flex gap-2">
-                  <dt className="text-gray-500 dark:text-gray-400">Location</dt>
+                  <dt className="text-gray-600 dark:text-gray-400">Location</dt>
                   <dd className="text-gray-900 dark:text-gray-100">Coral Springs, FL 33065</dd>
                 </div>
                 <div className="flex gap-2">
-                  <dt className="text-gray-500 dark:text-gray-400">Web</dt>
+                  <dt className="text-gray-600 dark:text-gray-400">Web</dt>
                   <dd>
                     <a href="https://garrellts.com" className={`hover:underline ${PRIMARY}`}>
                       garrellts.com

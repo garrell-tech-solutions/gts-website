@@ -10,7 +10,7 @@ function StatBlock({ value, suffix, label }: { value: string; suffix?: string; l
         {value}
         {suffix && <span className="text-gold">{suffix}</span>}
       </div>
-      <div className="text-primary-800/70 dark:text-primary-300/70 mt-1 text-xs sm:text-sm">
+      <div className="text-primary-700 dark:text-primary-300/70 mt-1 text-xs sm:text-sm">
         {label}
       </div>
     </div>
@@ -117,7 +117,7 @@ export function KeyStats({ stats = CAPABILITY_STATS }: { stats?: Stat[] }) {
       aria-label="Key figures"
       className="bg-mint -mx-4 px-4 py-6 sm:mx-0 sm:rounded-lg sm:px-10 dark:bg-gray-900"
     >
-      <p className="text-primary-800/70 dark:text-primary-300/70 mb-4 text-center text-sm font-semibold tracking-[0.2em] uppercase sm:text-base">
+      <p className="text-primary-700 dark:text-primary-300/70 mb-4 text-center text-sm font-semibold tracking-[0.2em] uppercase sm:text-base">
         Track Record
       </p>
       <div className={`grid grid-cols-2 gap-6 sm:gap-4 ${columns}`}>
@@ -133,7 +133,7 @@ export function SupportedOrgs() {
   return (
     <section aria-label="Supported agencies and enterprise systems" className="mt-8">
       <div className="-mx-4 bg-gray-50 px-4 py-6 sm:mx-0 sm:rounded-lg sm:px-10 dark:bg-gray-900/50">
-        <p className="text-primary-800/70 dark:text-primary-300/70 mb-5 text-center text-sm font-semibold tracking-[0.2em] uppercase sm:text-base">
+        <p className="text-primary-700 dark:text-primary-300/70 mb-5 text-center text-sm font-semibold tracking-[0.2em] uppercase sm:text-base">
           Supported Agencies and Enterprise Systems
         </p>
         <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">

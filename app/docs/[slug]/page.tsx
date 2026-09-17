@@ -94,7 +94,7 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
           &middot;{' '}
           <a
             href={rawHref}
-            className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+            className="text-primary-700 hover:text-primary-800 dark:text-primary-500 dark:hover:text-primary-400 underline"
           >
             Raw markdown
           </a>
@@ -108,7 +108,7 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
           Machine-readable copy of this document:{' '}
           <a
             href={rawHref}
-            className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+            className="text-primary-700 hover:text-primary-800 dark:text-primary-500 dark:hover:text-primary-400 underline"
           >
             {docMarkdownUrl(doc.slug)}
           </a>
