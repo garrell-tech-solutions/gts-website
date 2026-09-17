@@ -95,7 +95,7 @@ export default function HomePage() {
               rel="noopener noreferrer"
               className="bg-gold text-primary-900 hover:bg-gold/90 mt-12 block rounded-md px-8 py-4 text-center text-base font-semibold shadow-sm transition-colors duration-200 sm:inline-block"
             >
-              Book a 30-minute consult →
+              Book a 30-min call →
             </a>
             <p className="mt-12 text-sm text-gray-500 dark:text-gray-400">
               Federal buyer?{' '}
