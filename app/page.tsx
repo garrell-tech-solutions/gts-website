@@ -80,7 +80,7 @@ export default function HomePage() {
           <div className="lg:flex-1">
             <h1
               id="hero-heading"
-              className="text-4xl leading-tight font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-6xl dark:text-gray-100"
+              className="max-w-2xl text-3xl leading-tight font-extrabold tracking-tight text-gray-900 sm:text-4xl md:text-5xl dark:text-gray-100"
             >
               Your business requirements, shipped as working software.
             </h1>
@@ -89,22 +89,23 @@ export default function HomePage() {
               Senior product ownership and engineering for growing businesses, backed by a decade of
               delivery on FBI and Army programs.
             </p>
-            <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
-              <a
-                href={CONSULT_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-gold text-primary-900 hover:bg-gold/90 rounded-md px-6 py-4 text-center text-base font-semibold transition-colors duration-200"
-              >
-                Book a 30-minute consult →
-              </a>
+            <a
+              href={CONSULT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-gold text-primary-900 hover:bg-gold/90 mt-12 block rounded-md px-8 py-4 text-center text-base font-semibold shadow-sm transition-colors duration-200 sm:inline-block"
+            >
+              Book a 30-minute consult →
+            </a>
+            <p className="mt-12 text-sm text-gray-500 dark:text-gray-400">
+              Federal buyer?{' '}
               <Link
                 href="/capability-statement"
-                className="text-primary-800 dark:text-primary-300 text-sm font-medium hover:underline"
+                className="text-primary-800 dark:text-primary-300 font-medium hover:underline"
               >
-                Federal buyer? View the capability statement
+                View the capability statement
               </Link>
-            </div>
+            </p>
           </div>
           <HeroPhoto />
         </section>
