@@ -1,0 +1,101 @@
+---
+title: 'Splitbench: Two AI Models Debate Any Topic You Choose'
+date: '2026-09-17'
+lastmod: '2026-09-17'
+tags: ['splitbench', 'ai', 'llm', 'product']
+draft: false
+summary: Splitbench has two different AI models argue opposite sides of your topic, lets you join in, and has a third model judge who argued it better.
+---
+
+[Splitbench](https://splitbench.com/) is an AI debate app I built. You give it a topic, one AI model argues for it, a second model (by default from a different lab) argues against it, and neither is allowed to back down. After the scheduled rounds you can step in with your own points, and when you ask for a ruling, a third model reads the whole transcript and picks a winner. The free tier needs no account and no card.
+
+## Why did I build an AI debate app?
+
+I got tired of agreeable AI. When I talked through an issue with an assistant, it tended to go along with me, and asking the same agent to push back against its own previous message was painful. I eventually figured the better setup was two _different_ AI models arguing opposing positions on a topic I choose. I also wanted to jump into the discussion and refine it, and I wanted some kind of agent to pick the winner at the end. Splitbench is that setup.
+
+The [about page](https://splitbench.com/about.html) puts the underlying problem this way: "Ask one model a contested question and you get its conclusion, with the objections it discounted on the way somewhere you cannot see."
+
+## How does a Splitbench debate work?
+
+A debate has three seats. Each one gets a fixed job, per the [about page](https://splitbench.com/about.html):
+
+- **The Ayes** argue the motion is true. It "was assigned that side; it was never asked what it thinks." It may not concede, soften, hedge, or look for middle ground, and every turn has to rebut the opponent's latest point by name before making exactly one new argument of under 180 words.
+- **The Noes** get the same instructions pointed the other way, and by default run on a different model from a different lab.
+- **The bench** is the judge. It reads the whole transcript once, at the end, and rules on it.
+
+Turns stream in token by token as they are written. If a provider fails or a reply gets filtered, that side loses its turn, but the debate keeps going.
+
+## Why use two different AI models instead of one?
+
+Splitbench puts different models on the two sides on purpose. The [about page](https://splitbench.com/about.html) gives the reason: "Two instances of one model share the same blind spots and the same trained instinct to agree." So the two benches are deliberately different models, and you can change either one.
+
+Splitbench routes every model call through [OpenRouter](https://openrouter.ai/), which is what lets each of the three seats sit on a different provider. The default arrangement puts the Ayes, the Noes, and the judge on three different labs. The debate itself is orchestrated as a graph with [LangGraph](https://langchain-ai.github.io/langgraph/).
+
+Splitbench also assigns each side instead of letting the models choose one. Models trained to be agreeable, left to talk something over, drift toward "you raise a fair point, and perhaps the truth is in between." Splitbench treats that as a failed debate. "Both sides have a point" is written into each debater's instructions as a loss.
+
+## How is this different from asking one chatbot to argue both sides?
+
+Asking one assistant to argue with itself is the workflow I was trying to get away from. The left column below is my experience with that workflow plus the [about page](https://splitbench.com/about.html)'s description of a single-model answer. The right column is how Splitbench works.
+
+|                 | One chatbot, asked to push back                 | Splitbench                                                                   |
+| --------------- | ----------------------------------------------- | ---------------------------------------------------------------------------- |
+| Models involved | One                                             | Three seats, by default on three different labs                              |
+| Position        | The model's own conclusion                      | Each side is assigned and may not concede                                    |
+| Pushback        | Painful to request from the same agent          | Every turn must rebut the opponent's latest point by name                    |
+| What you see    | A conclusion; discounted objections stay hidden | The full transcript of both cases under attack                               |
+| Separate judge  | No                                              | Yes: it names a winner, its reasoning, and the losing side's strongest point |
+
+## What does "sharpening the motion" do?
+
+Sharpening turns a loose topic into a debatable claim before the first turn. A vague motion produces a vague debate, because the two models spend their turns disputing what the words mean instead of whether the claim is true.
+
+The Sharpen step runs a short interview, a couple of questions chosen for your subject, then proposes a motion plus a few lines of agreed ground. That agreed ground is binding on both debaters and on the judge. The step is optional. If the interview fails, you keep the motion you typed.
+
+## Can I join the debate myself?
+
+Yes. After the last scheduled round, the debate pauses and opens the floor to you, and you can speak before asking for the ruling. The free tier allows a few turns from the floor, and a paid account keeps the floor open as long as you like.
+
+You are the floor, not a side. Both debaters have to address your point before advancing their own. They may refute you, or accept your premise only as far as it damages their opponent, but they may not concede to you. This is what lets you jump into the discussion and refine it, which is what I wanted.
+
+## How does the AI judge pick a winner?
+
+The judge reads the full transcript at the end and rules in three parts: a winner, two or three sentences of reasoning, and the losing side's strongest point. According to the [about page](https://splitbench.com/about.html), it judges the reasoning, the evidence, and whether each rebuttal actually landed, and it is told to ignore style, confidence, verbosity, and its own opinion of the motion. It also thinks on a larger budget than either debater.
+
+If you took the floor, the ruling adds a fourth line saying whether your point was answered, dodged, or left standing, and by whom. You are free to disagree with the verdict. As the about page puts it, "The transcript is the thing you came for."
+
+## What does Splitbench cost?
+
+Splitbench is free to use under house caps, and a paid account lifts those caps. The [pricing page](https://splitbench.com/pricing.html) lays out both:
+
+| Plan               | Price                                                                  | What you get                                                                                                     |
+| ------------------ | ---------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| The gallery        | Free, no account, no card                                              | A short roster of models with effort held down, a fixed number of rounds, a few turns from the floor, sharing    |
+| A standing account | $0.05 per unit, less in larger packs; bought in advance, never expires | The full model roster in any chair, effort as high as a model allows, debates as long as you want, an open floor |
+
+Units come in packs of 100 for $5, 450 for $20 (11% off), and 1,200 for $50 (17% off). The pricing page estimates 100 units covers about 10 debates on the default bench, or 236 on cheap models. Debates are priced in units rather than per debate because cost depends on which models argue and how hard they think. Each turn draws down what its model and effort actually cost, and the price of every chair shows on screen before the debate starts.
+
+## Can I save and share a debate?
+
+A finished debate can be saved to an unlisted link. The saved copy is an immutable snapshot of the motion, the agreed ground, the transcript, the ruling, and which model argued which side, and it asks search engines not to index it. Only the browser that saved it can unpublish it. You can also copy a debate out as Markdown to hand to another model, with a preamble explaining that both sides were assigned and forbidden to concede.
+
+## FAQ
+
+**Do I need an API key to use Splitbench?**
+No. The app never asks for one, and there is no bring-your-own-key field. Model calls run on Splitbench's own account.
+
+**Do I need an account?**
+Not for the free tier. Buying units asks you to sign in, since units land in an account. Payment goes through Stripe.
+
+**Can I choose which models debate?**
+Yes. You can change either debater. The free tier offers a short roster, and a paid account opens every model in the catalogue for any chair, including the judge.
+
+**Who makes Splitbench?**
+Splitbench is built and run by Garrell Tech Solutions LLC, a limited liability company formed in Florida.
+
+## Sources
+
+- [Splitbench](https://splitbench.com/)
+- [Splitbench: about](https://splitbench.com/about.html)
+- [Splitbench: what a seat costs](https://splitbench.com/pricing.html)
+- [LangGraph](https://langchain-ai.github.io/langgraph/)
+- [OpenRouter](https://openrouter.ai/)
