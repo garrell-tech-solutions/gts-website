@@ -1,32 +1,25 @@
 'use client'
 
-import { useState, type FormEvent } from 'react'
+import { useEffect, useRef, useState, type FormEvent } from 'react'
 import siteMetadata from '@/data/siteMetadata'
+import { TIMELINES, type InquiryForm, type InquiryOutcome } from '@/data/inquiry'
 
-type Lead = {
-  name: string
-  email: string
-  company: string
-  timeline: string
-  need: string
-}
+type Status = 'idle' | 'sending' | InquiryOutcome
 
-const TIMELINES = ['Within a month', '1 to 3 months', '3 months or more', 'Just exploring']
-
-// For now a submission opens the visitor's email app with the details filled in.
-// The form is being wired to the backend in a follow-up
-// (docs/plans/2026-09-24-gts-inquiry-backend.md); only this function changes.
-function submitLead(lead: Lead) {
-  const subject = `Project inquiry from ${lead.name}${lead.company ? `, ${lead.company}` : ''}`
-  const body = [
-    `Name: ${lead.name}`,
-    `Email: ${lead.email}`,
-    `Company: ${lead.company || 'Not given'}`,
-    `Timeline: ${lead.timeline}`,
-    '',
-    lead.need,
-  ].join('\n')
-  window.location.href = `mailto:${siteMetadata.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+// Posts to this site's own /api/inquiry, which forwards to the backend. The
+// browser never learns where the backend is or how requests to it are signed.
+async function sendInquiry(form: InquiryForm): Promise<InquiryOutcome> {
+  try {
+    const response = await fetch('/api/inquiry', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(form),
+    })
+    const { outcome } = (await response.json()) as { outcome?: InquiryOutcome }
+    return outcome ?? 'failed'
+  } catch {
+    return 'failed'
+  }
 }
 
 const LABEL = 'text-[15px] font-semibold text-gray-900 dark:text-gray-100'
@@ -34,22 +27,68 @@ const CONTROL =
   'mt-2 block w-full rounded-md border-gray-400 bg-white text-base text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-950 dark:text-gray-100'
 const LINK = 'text-primary-800 dark:text-primary-300 font-semibold underline'
 
-export default function LeadForm({ consultUrl }: { consultUrl: string }) {
-  const [sent, setSent] = useState(false)
+function ContactFallback() {
+  return (
+    <>
+      Call{' '}
+      <a href={`tel:${siteMetadata.phoneE164}`} className={LINK}>
+        {siteMetadata.phone}
+      </a>{' '}
+      or email{' '}
+      <a href={`mailto:${siteMetadata.email}`} className={LINK}>
+        {siteMetadata.email}
+      </a>
+      .
+    </>
+  )
+}
 
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
+function Sent() {
+  return (
+    <div
+      role="status"
+      className="bg-mint border-t-gold flex flex-col gap-3 rounded-xl border-t-4 p-8 sm:p-10 dark:bg-gray-900"
+    >
+      <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">Thanks, I have it.</p>
+      <p className="text-lg text-gray-700 dark:text-gray-300">
+        I&rsquo;ll read it myself and get back to you with next steps. Need me sooner?{' '}
+        <ContactFallback />
+      </p>
+    </div>
+  )
+}
+
+export default function LeadForm({ consultUrl }: { consultUrl: string }) {
+  const [status, setStatus] = useState<Status>('idle')
+  const shownAt = useRef<number | null>(null)
+
+  useEffect(() => {
+    shownAt.current = Date.now()
+  }, [])
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
     const field = (name: string) => String(data.get(name) ?? '')
-    submitLead({
-      name: field('name'),
-      email: field('email'),
-      company: field('company'),
-      timeline: field('timeline'),
-      need: field('need'),
-    })
-    setSent(true)
+    setStatus('sending')
+    setStatus(
+      await sendInquiry({
+        name: field('name'),
+        email: field('email'),
+        company: field('company'),
+        timeline: field('timeline'),
+        need: field('need'),
+        referrer: document.referrer,
+        landingPath: window.location.pathname,
+        timeOnFormMs: shownAt.current === null ? null : Date.now() - shownAt.current,
+        website: field('website'),
+      })
+    )
   }
+
+  if (status === 'delivered') return <Sent />
+
+  const sending = status === 'sending'
 
   return (
     <form
@@ -64,6 +103,7 @@ export default function LeadForm({ consultUrl }: { consultUrl: string }) {
             type="text"
             autoComplete="name"
             required
+            maxLength={300}
             className={`${CONTROL} h-12`}
           />
         </label>
@@ -74,6 +114,7 @@ export default function LeadForm({ consultUrl }: { consultUrl: string }) {
             type="email"
             autoComplete="email"
             required
+            maxLength={300}
             className={`${CONTROL} h-12`}
           />
         </label>
@@ -83,6 +124,7 @@ export default function LeadForm({ consultUrl }: { consultUrl: string }) {
             name="company"
             type="text"
             autoComplete="organization"
+            maxLength={300}
             className={`${CONTROL} h-12`}
           />
         </label>
@@ -97,27 +139,35 @@ export default function LeadForm({ consultUrl }: { consultUrl: string }) {
       </div>
       <label className={LABEL}>
         What are you trying to build or fix?
-        <textarea name="need" rows={5} required className={`${CONTROL} resize-y`} />
+        <textarea
+          name="need"
+          rows={5}
+          required
+          maxLength={5000}
+          className={`${CONTROL} resize-y`}
+        />
       </label>
+      {/* Hidden from people and from assistive tech; only a bot fills it in. */}
+      <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
+        <label>
+          Website
+          <input name="website" type="text" tabIndex={-1} autoComplete="off" />
+        </label>
+      </div>
       <button
         type="submit"
-        className="bg-gold text-primary-900 hover:bg-gold/90 mt-2 h-14 rounded-md text-lg font-bold transition-colors duration-200"
+        disabled={sending}
+        className="bg-gold text-primary-900 hover:bg-gold/90 mt-2 h-14 rounded-md text-lg font-bold transition-colors duration-200 disabled:cursor-wait disabled:opacity-70"
       >
-        Send my project details
+        {sending ? 'Sending…' : 'Send my project details'}
       </button>
       <p role="status" className="text-center text-sm text-gray-600 dark:text-gray-400">
-        {sent ? (
+        {status === 'failed' ? (
           <>
-            Your email app should open with your details filled in. If it didn&rsquo;t, call{' '}
-            <a href={`tel:${siteMetadata.phoneE164}`} className={LINK}>
-              {siteMetadata.phone}
-            </a>{' '}
-            or email{' '}
-            <a href={`mailto:${siteMetadata.email}`} className={LINK}>
-              {siteMetadata.email}
-            </a>
-            .
+            That didn&rsquo;t go through, sorry. <ContactFallback />
           </>
+        ) : status === 'missing_fields' ? (
+          'Please add your name, a valid email, and what you need built.'
         ) : (
           <>
             Prefer to pick a time?{' '}
