@@ -43,7 +43,12 @@ const HOME_STATS: Stat[] = [
   { value: '10', suffix: '+', label: 'Years of federal software delivery' },
 ]
 
-const HERO_PROOF = ['FBI', 'U.S. Army', 'U.S. Marine Corps', '150+ businesses on Callpurity']
+const HERO_PROOF = [
+  { name: 'FBI (N-DEx)', logo: '/static/images/delivered-for/fbi.png' },
+  { name: 'U.S. Army', logo: '/static/images/delivered-for/army.png' },
+  { name: 'U.S. Marine Corps', logo: '/static/images/delivered-for/usmc.png' },
+  { name: '150+ businesses on Callpurity', logo: '/static/images/delivered-for/callpurity.png' },
+]
 
 const DELIVERED_FOR = [
   'FBI',
@@ -70,7 +75,7 @@ function Hero() {
       >
         Your business requirements, shipped as working software.
       </h1>
-      <p className="mx-auto mt-6 max-w-2xl text-lg text-balance text-gray-600 sm:text-xl dark:text-gray-400">
+      <p className="mx-auto mt-6 max-w-2xl text-lg text-balance text-gray-600 sm:text-xl lg:max-w-4xl dark:text-gray-400">
         I scope it, build it, and lead the technical side. No full-time CTO required.
       </p>
       <a
@@ -81,20 +86,16 @@ function Hero() {
       >
         Book a 30-min scoping call
       </a>
-      <div className="mt-6 flex flex-col items-center gap-1.5 text-[15px] text-gray-700 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-3 dark:text-gray-300">
+      <div className="mt-6 flex flex-col items-start gap-2.5 text-left text-[15px] text-gray-700 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-x-5 sm:text-center dark:text-gray-300">
         <span className={`${EYEBROW} text-xs text-gray-600 dark:text-gray-400`}>Delivered for</span>
-        <span className="font-semibold">
-          {HERO_PROOF.map((name, i) => (
-            <span key={name}>
-              {i > 0 && (
-                <span aria-hidden="true" className="mx-2 text-gray-400">
-                  ·
-                </span>
-              )}
+        <ul className="flex flex-col gap-2 font-semibold sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-5">
+          {HERO_PROOF.map(({ name, logo }) => (
+            <li key={name} className="inline-flex items-center gap-2">
+              <Image src={logo} alt="" width={24} height={24} className="h-6 w-6 shrink-0" />
               {name}
-            </span>
+            </li>
           ))}
-        </span>
+        </ul>
       </div>
       <BeforeAfter />
     </section>
