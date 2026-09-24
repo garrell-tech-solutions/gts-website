@@ -44,15 +44,14 @@ const HOME_STATS: Stat[] = [
   { value: '10', suffix: '+', label: 'Years of federal software delivery' },
 ]
 
-const HERO_PROOF = ['FBI', 'U.S. Army', 'U.S. Marine Corps', '150+ businesses on Callpurity']
-
-const DELIVERED_FOR = [
-  'FBI',
-  'U.S. Department of Justice',
-  'U.S. Army',
-  'U.S. Marine Corps',
-  'Callpurity',
-  'Pro Health Partners',
+// Entries without a logo get a generic building icon.
+const DELIVERED_FOR: { name: string; logo?: string }[] = [
+  { name: 'FBI (N-DEx)', logo: '/static/images/delivered-for/fbi.png' },
+  { name: 'U.S. Department of Justice', logo: '/static/images/delivered-for/doj.png' },
+  { name: 'U.S. Army', logo: '/static/images/delivered-for/army.png' },
+  { name: 'U.S. Marine Corps', logo: '/static/images/delivered-for/usmc.png' },
+  { name: 'Callpurity', logo: '/static/images/delivered-for/callpurity.png' },
+  { name: 'Pro Health Partners' },
 ]
 
 // Author avatar with the background removed. A higher-resolution cut-out would sharpen the card.
@@ -69,27 +68,12 @@ function Hero() {
       >
         Your business requirements, shipped as working software.
       </h1>
-      <p className="mx-auto mt-6 max-w-2xl text-lg text-balance text-gray-600 sm:text-xl dark:text-gray-400">
+      <p className="mx-auto mt-6 max-w-2xl text-lg text-balance text-gray-600 sm:text-xl lg:max-w-4xl dark:text-gray-400">
         I scope it, build it, and lead the technical side. No full-time CTO required.
       </p>
       <CalendlyLink className="bg-gold text-primary-900 hover:bg-gold/90 mt-8 block rounded-md px-7 py-5 text-lg font-bold transition-colors duration-200 sm:inline-block">
         Book a 30-min scoping call
       </CalendlyLink>
-      <div className="mt-6 flex flex-col items-center gap-1.5 text-[15px] text-gray-700 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-3 dark:text-gray-300">
-        <span className={`${EYEBROW} text-xs text-gray-600 dark:text-gray-400`}>Delivered for</span>
-        <span className="font-semibold">
-          {HERO_PROOF.map((name, i) => (
-            <span key={name}>
-              {i > 0 && (
-                <span aria-hidden="true" className="mx-2 text-gray-400">
-                  ·
-                </span>
-              )}
-              {name}
-            </span>
-          ))}
-        </span>
-      </div>
       <BeforeAfter />
     </section>
   )
@@ -98,9 +82,15 @@ function Hero() {
 function ProofBand() {
   return (
     <section
-      aria-label="Track record"
-      className="bg-primary-900 -mx-4 mt-8 px-4 py-10 sm:mx-0 sm:rounded-b-lg sm:px-10 sm:py-14 md:mt-0"
+      aria-labelledby="track-record-heading"
+      className="bg-primary-900 -mx-4 mt-12 px-4 py-10 sm:mx-0 sm:rounded-lg sm:px-10 sm:py-14 md:mt-16"
     >
+      <div className="mb-8 sm:mb-10">
+        <h2 id="track-record-heading" className={`${EYEBROW} text-primary-300`}>
+          Track record
+        </h2>
+        <div className="bg-gold mt-3 h-px w-12" />
+      </div>
       <dl className="grid grid-cols-2 gap-x-4 gap-y-7 sm:gap-8 xl:grid-cols-4">
         {HOME_STATS.map((stat) => (
           <div
@@ -115,9 +105,31 @@ function ProofBand() {
           </div>
         ))}
       </dl>
-      <div className="mt-8 flex flex-col gap-2.5 border-t border-white/20 pt-6 md:flex-row md:items-center md:gap-6">
+      <div className="mt-8 flex flex-col gap-4 border-t border-white/20 pt-6">
         <p className={`${EYEBROW} text-primary-300 text-xs whitespace-nowrap`}>Delivered for</p>
-        <p className="font-medium text-white sm:text-lg">{DELIVERED_FOR.join('  ·  ')}</p>
+        <ul className="grid grid-cols-1 gap-3 font-medium text-white sm:grid-cols-2 sm:gap-x-6 sm:text-lg lg:grid-cols-3">
+          {DELIVERED_FOR.map(({ name, logo }) => (
+            <li key={name} className="inline-flex items-center gap-2.5">
+              {logo ? (
+                <Image src={logo} alt="" width={24} height={24} className="h-6 w-6 shrink-0" />
+              ) : (
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                  className="text-primary-300 h-6 w-6 shrink-0"
+                >
+                  <path d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
+                </svg>
+              )}
+              {name}
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   )

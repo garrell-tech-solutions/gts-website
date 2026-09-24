@@ -35,9 +35,7 @@ const ORDERS = [
 ]
 
 const LABEL = 'mb-3 text-xs font-semibold tracking-[0.2em] uppercase sm:text-sm'
-// Cards sit flush on the proof band below from md up, so their bottoms stay open there.
-const FRAME =
-  'overflow-hidden rounded-lg border border-gray-300 md:h-[300px] md:rounded-b-none md:border-b-0'
+const FRAME = 'overflow-hidden rounded-lg border border-gray-300 md:h-[300px]'
 
 function Spreadsheet() {
   return (
