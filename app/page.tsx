@@ -2,6 +2,7 @@ import { genPageMetadata } from 'app/seo'
 import Image from '@/components/Image'
 import BeforeAfter from '@/components/BeforeAfter'
 import LeadForm from '@/components/LeadForm'
+import CalendlyLink from '@/components/CalendlyLink'
 import type { Stat } from '@/components/SocialProof'
 import siteMetadata from '@/data/siteMetadata'
 
@@ -54,8 +55,6 @@ const DELIVERED_FOR = [
   'Pro Health Partners',
 ]
 
-const CONSULT_URL = 'https://calendly.com/jeremy-garrell/30min'
-
 // Author avatar with the background removed. A higher-resolution cut-out would sharpen the card.
 const HEADSHOT = { src: '/static/images/jeremy-cutout.png', width: 255, height: 201 }
 
@@ -73,14 +72,9 @@ function Hero() {
       <p className="mx-auto mt-6 max-w-2xl text-lg text-balance text-gray-600 sm:text-xl dark:text-gray-400">
         I scope it, build it, and lead the technical side. No full-time CTO required.
       </p>
-      <a
-        href={CONSULT_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="bg-gold text-primary-900 hover:bg-gold/90 mt-8 block rounded-md px-7 py-5 text-lg font-bold transition-colors duration-200 sm:inline-block"
-      >
+      <CalendlyLink className="bg-gold text-primary-900 hover:bg-gold/90 mt-8 block rounded-md px-7 py-5 text-lg font-bold transition-colors duration-200 sm:inline-block">
         Book a 30-min scoping call
-      </a>
+      </CalendlyLink>
       <div className="mt-6 flex flex-col items-center gap-1.5 text-[15px] text-gray-700 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-3 dark:text-gray-300">
         <span className={`${EYEBROW} text-xs text-gray-600 dark:text-gray-400`}>Delivered for</span>
         <span className="font-semibold">
@@ -185,7 +179,7 @@ function StartProject() {
         </div>
       </div>
       <div className="xl:col-span-6 xl:col-start-7">
-        <LeadForm consultUrl={CONSULT_URL} />
+        <LeadForm />
       </div>
     </section>
   )

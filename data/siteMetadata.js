@@ -13,6 +13,7 @@ const siteMetadata = {
   email: 'jeremy@garrellts.com',
   phone: '(954) 354-7710',
   phoneE164: '+19543547710',
+  calendly: 'https://calendly.com/jeremy-garrell/30min',
   github: 'https://github.com/garrell-tech-solutions',
   x: 'https://twitter.com/x',
   // twitter: 'https://twitter.com/Twitter',
