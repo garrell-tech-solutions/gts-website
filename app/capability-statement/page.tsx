@@ -1,4 +1,5 @@
 import { genPageMetadata } from 'app/seo'
+import siteMetadata from '@/data/siteMetadata'
 import { KeyStats, SupportedOrgs } from '@/components/SocialProof'
 
 export const metadata = genPageMetadata({
@@ -113,10 +114,10 @@ export default function CapabilityStatementPage() {
                   </dt>
                   <dd>
                     <a
-                      href="tel:+12014007782"
+                      href={`tel:${siteMetadata.phoneE164}`}
                       className="text-gray-700 hover:underline dark:text-gray-300"
                     >
-                      (201) 400-7782
+                      {siteMetadata.phone}
                     </a>
                   </dd>
                 </div>
@@ -332,8 +333,11 @@ export default function CapabilityStatementPage() {
                 <div className="flex gap-2">
                   <dt className="text-gray-600 dark:text-gray-400">Phone</dt>
                   <dd>
-                    <a href="tel:+12014007782" className={`hover:underline ${PRIMARY}`}>
-                      (201) 400-7782
+                    <a
+                      href={`tel:${siteMetadata.phoneE164}`}
+                      className={`hover:underline ${PRIMARY}`}
+                    >
+                      {siteMetadata.phone}
                     </a>
                   </dd>
                 </div>

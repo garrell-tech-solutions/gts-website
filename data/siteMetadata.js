@@ -11,6 +11,8 @@ const siteMetadata = {
   siteLogo: `${process.env.BASE_PATH || ''}/static/images/logo.png`,
   socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.png`,
   email: 'jeremy@garrellts.com',
+  phone: '(954) 354-7710',
+  phoneE164: '+19543547710',
   github: 'https://github.com/garrell-tech-solutions',
   x: 'https://twitter.com/x',
   // twitter: 'https://twitter.com/Twitter',
