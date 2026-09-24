@@ -31,7 +31,7 @@ function ContactFallback() {
   return (
     <>
       Call{' '}
-      <a href={`tel:${siteMetadata.phoneE164}`} className={LINK}>
+      <a href={`tel:${siteMetadata.phoneE164}`} className={`${LINK} whitespace-nowrap`}>
         {siteMetadata.phone}
       </a>{' '}
       or email{' '}
@@ -43,14 +43,31 @@ function ContactFallback() {
   )
 }
 
+// Laid over the form in the same grid cell, so the box keeps the form's height.
 function Sent() {
   return (
     <div
       role="status"
-      className="bg-mint border-t-gold flex flex-col gap-3 rounded-xl border-t-4 p-8 sm:p-10 dark:bg-gray-900"
+      className="bg-mint border-t-gold col-start-1 row-start-1 flex flex-col items-center justify-center gap-5 rounded-xl border-t-4 p-8 text-center sm:p-10 dark:bg-gray-900"
     >
-      <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">Thanks, I have it.</p>
-      <p className="text-lg text-gray-700 dark:text-gray-300">
+      <span className="bg-primary-800 flex h-16 w-16 items-center justify-center rounded-full text-white">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+          className="h-8 w-8"
+        >
+          <path d="m5 12.5 4.5 4.5L19 7.5" />
+        </svg>
+      </span>
+      <p className="text-3xl font-bold text-gray-900 sm:text-4xl dark:text-gray-100">
+        Thanks, I have it.
+      </p>
+      <p className="max-w-md text-xl text-balance text-gray-700 dark:text-gray-300">
         I&rsquo;ll read it myself and get back to you with next steps. Need me sooner?{' '}
         <ContactFallback />
       </p>
@@ -86,98 +103,101 @@ export default function LeadForm({ consultUrl }: { consultUrl: string }) {
     )
   }
 
-  if (status === 'delivered') return <Sent />
-
   const sending = status === 'sending'
+  const delivered = status === 'delivered'
 
   return (
-    <form
-      onSubmit={onSubmit}
-      className="flex flex-col gap-5 rounded-xl border border-gray-300 bg-white p-5 sm:p-10 dark:border-gray-700 dark:bg-gray-950"
-    >
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-        <label className={LABEL}>
-          Name
-          <input
-            name="name"
-            type="text"
-            autoComplete="name"
-            required
-            maxLength={300}
-            className={`${CONTROL} h-12`}
-          />
-        </label>
-        <label className={LABEL}>
-          Work email
-          <input
-            name="email"
-            type="email"
-            autoComplete="email"
-            required
-            maxLength={300}
-            className={`${CONTROL} h-12`}
-          />
-        </label>
-        <label className={LABEL}>
-          Company
-          <input
-            name="company"
-            type="text"
-            autoComplete="organization"
-            maxLength={300}
-            className={`${CONTROL} h-12`}
-          />
-        </label>
-        <label className={LABEL}>
-          When do you need it?
-          <select name="timeline" className={`${CONTROL} h-12`}>
-            {TIMELINES.map((t) => (
-              <option key={t}>{t}</option>
-            ))}
-          </select>
-        </label>
-      </div>
-      <label className={LABEL}>
-        What are you trying to build or fix?
-        <textarea
-          name="need"
-          rows={5}
-          required
-          maxLength={5000}
-          className={`${CONTROL} resize-y`}
-        />
-      </label>
-      {/* Hidden from people and from assistive tech; only a bot fills it in. */}
-      <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
-        <label>
-          Website
-          <input name="website" type="text" tabIndex={-1} autoComplete="off" />
-        </label>
-      </div>
-      <button
-        type="submit"
-        disabled={sending}
-        className="bg-gold text-primary-900 hover:bg-gold/90 mt-2 h-14 rounded-md text-lg font-bold transition-colors duration-200 disabled:cursor-wait disabled:opacity-70"
+    <div className="grid">
+      <form
+        onSubmit={onSubmit}
+        inert={delivered}
+        className={`col-start-1 row-start-1 flex flex-col gap-5 rounded-xl border border-gray-300 bg-white p-5 sm:p-10 dark:border-gray-700 dark:bg-gray-950 ${delivered ? 'invisible' : ''}`}
       >
-        {sending ? 'Sending…' : 'Send my project details'}
-      </button>
-      <p role="status" className="text-center text-sm text-gray-600 dark:text-gray-400">
-        {status === 'failed' ? (
-          <>
-            That didn&rsquo;t go through, sorry. <ContactFallback />
-          </>
-        ) : status === 'missing_fields' ? (
-          'Please add your name, a valid email, and what you need built.'
-        ) : (
-          <>
-            Prefer to pick a time?{' '}
-            <a href={consultUrl} target="_blank" rel="noopener noreferrer" className={LINK}>
-              Book the 30-min call directly
-            </a>
-            .
-          </>
-        )}
-      </p>
-    </form>
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+          <label className={LABEL}>
+            Name
+            <input
+              name="name"
+              type="text"
+              autoComplete="name"
+              required
+              maxLength={300}
+              className={`${CONTROL} h-12`}
+            />
+          </label>
+          <label className={LABEL}>
+            Work email
+            <input
+              name="email"
+              type="email"
+              autoComplete="email"
+              required
+              maxLength={300}
+              className={`${CONTROL} h-12`}
+            />
+          </label>
+          <label className={LABEL}>
+            Company
+            <input
+              name="company"
+              type="text"
+              autoComplete="organization"
+              maxLength={300}
+              className={`${CONTROL} h-12`}
+            />
+          </label>
+          <label className={LABEL}>
+            When do you need it?
+            <select name="timeline" className={`${CONTROL} h-12`}>
+              {TIMELINES.map((t) => (
+                <option key={t}>{t}</option>
+              ))}
+            </select>
+          </label>
+        </div>
+        <label className={LABEL}>
+          What are you trying to build or fix?
+          <textarea
+            name="need"
+            rows={5}
+            required
+            maxLength={5000}
+            className={`${CONTROL} resize-y`}
+          />
+        </label>
+        {/* Hidden from people and from assistive tech; only a bot fills it in. */}
+        <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
+          <label>
+            Website
+            <input name="website" type="text" tabIndex={-1} autoComplete="off" />
+          </label>
+        </div>
+        <button
+          type="submit"
+          disabled={sending}
+          className="bg-gold text-primary-900 hover:bg-gold/90 mt-2 h-14 rounded-md text-lg font-bold transition-colors duration-200 disabled:cursor-wait disabled:opacity-70"
+        >
+          {sending ? 'Sending…' : 'Send my project details'}
+        </button>
+        <p role="status" className="text-center text-sm text-gray-600 dark:text-gray-400">
+          {status === 'failed' ? (
+            <>
+              That didn&rsquo;t go through, sorry. <ContactFallback />
+            </>
+          ) : status === 'missing_fields' ? (
+            'Please add your name, a valid email, and what you need built.'
+          ) : (
+            <>
+              Prefer to pick a time?{' '}
+              <a href={consultUrl} target="_blank" rel="noopener noreferrer" className={LINK}>
+                Book the 30-min call directly
+              </a>
+              .
+            </>
+          )}
+        </p>
+      </form>
+      {delivered && <Sent />}
+    </div>
   )
 }
