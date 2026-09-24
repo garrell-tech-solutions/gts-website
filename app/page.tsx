@@ -106,7 +106,7 @@ function ProofBand() {
   return (
     <section
       aria-label="Track record"
-      className="bg-primary-900 -mx-4 mt-8 px-4 py-10 sm:mx-0 sm:rounded-b-lg sm:px-10 sm:py-14 md:mt-0"
+      className="bg-primary-900 -mx-4 mt-12 px-4 py-10 sm:mx-0 sm:rounded-lg sm:px-10 sm:py-14 md:mt-16"
     >
       <dl className="grid grid-cols-2 gap-x-4 gap-y-7 sm:gap-8 xl:grid-cols-4">
         {HOME_STATS.map((stat) => (
