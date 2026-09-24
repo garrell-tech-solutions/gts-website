@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type FormEvent } from 'react'
 import siteMetadata from '@/data/siteMetadata'
+import CalendlyLink from '@/components/CalendlyLink'
 import { TIMELINES, type InquiryForm, type InquiryOutcome } from '@/data/inquiry'
 
 type Status = 'idle' | 'sending' | InquiryOutcome
@@ -75,7 +76,7 @@ function Sent() {
   )
 }
 
-export default function LeadForm({ consultUrl }: { consultUrl: string }) {
+export default function LeadForm() {
   const [status, setStatus] = useState<Status>('idle')
   const shownAt = useRef<number | null>(null)
 
@@ -189,10 +190,7 @@ export default function LeadForm({ consultUrl }: { consultUrl: string }) {
           ) : (
             <>
               Prefer to pick a time?{' '}
-              <a href={consultUrl} target="_blank" rel="noopener noreferrer" className={LINK}>
-                Book the 30-min call directly
-              </a>
-              .
+              <CalendlyLink className={LINK}>Book the 30-min call directly</CalendlyLink>.
             </>
           )}
         </p>

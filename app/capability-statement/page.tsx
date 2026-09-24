@@ -1,6 +1,7 @@
 import { genPageMetadata } from 'app/seo'
 import siteMetadata from '@/data/siteMetadata'
 import { KeyStats, SupportedOrgs } from '@/components/SocialProof'
+import CalendlyLink from '@/components/CalendlyLink'
 
 export const metadata = genPageMetadata({
   title: 'Capability Statement: Federal Software Delivery, Cloud to Tactical Edge',
@@ -122,14 +123,9 @@ export default function CapabilityStatementPage() {
                   </dd>
                 </div>
               </dl>
-              <a
-                href="https://calendly.com/jeremy-garrell/30min"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-gold text-primary-900 hover:bg-gold/90 mt-4 block rounded-md px-4 py-3 text-center text-sm font-semibold transition-colors duration-200"
-              >
+              <CalendlyLink className="bg-gold text-primary-900 hover:bg-gold/90 mt-4 block rounded-md px-4 py-3 text-center text-sm font-semibold transition-colors duration-200">
                 Book a 30-min call →
-              </a>
+              </CalendlyLink>
             </div>
           </div>
         </section>
@@ -354,14 +350,9 @@ export default function CapabilityStatementPage() {
                   </dd>
                 </div>
               </dl>
-              <a
-                href="https://calendly.com/jeremy-garrell/30min"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-gold text-primary-900 hover:bg-gold/90 mt-5 inline-block self-start rounded-md px-5 py-3 text-center text-sm font-semibold transition-colors duration-200 lg:mt-auto"
-              >
+              <CalendlyLink className="bg-gold text-primary-900 hover:bg-gold/90 mt-5 inline-block self-start rounded-md px-5 py-3 text-center text-sm font-semibold transition-colors duration-200 lg:mt-auto">
                 Book a 30-Minute Call
-              </a>
+              </CalendlyLink>
             </MintPanel>
           </section>
         </div>

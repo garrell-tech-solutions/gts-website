@@ -1,3 +1,5 @@
+// Next.js loads this config as CommonJS, so require() is the right import form here.
+/* eslint-disable @typescript-eslint/no-require-imports */
 const { withContentlayer } = require('next-contentlayer2')
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
@@ -7,13 +9,13 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 // You might need to insert additional domains in script-src if you are using external services
 const ContentSecurityPolicy = `
   default-src 'self';
-  script-src 'self' 'unsafe-eval' 'unsafe-inline' giscus.app analytics.umami.is;
-  style-src 'self' 'unsafe-inline';
+  script-src 'self' 'unsafe-eval' 'unsafe-inline' giscus.app analytics.umami.is assets.calendly.com;
+  style-src 'self' 'unsafe-inline' assets.calendly.com;
   img-src * blob: data:;
   media-src *.s3.amazonaws.com;
   connect-src *;
   font-src 'self';
-  frame-src giscus.app
+  frame-src giscus.app calendly.com
 `
 
 const securityHeaders = [
