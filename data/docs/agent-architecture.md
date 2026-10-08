@@ -1,6 +1,6 @@
 ---
 title: Agent Architecture Standards
-summary: The architectural standards Garrell Tech Solutions applies to every codebase, written for retrieval by coding agents. Covers abstracted set operations, one owner per rule, and core entities with boundary translation.
+summary: The architectural standards Garrell Tech Solutions applies to every codebase, written for retrieval by coding agents. Covers abstracted set operations, one owner per rule, core entities with boundary translation, and minimal comments.
 date: '2026-08-21'
 lastmod: '2026-10-08'
 ---
@@ -106,3 +106,11 @@ Core business entities sit at the center of the system and know nothing about ho
 5. **No entities at the edge.** Output receives purpose-built view models or DTOs, never entities. Input is parsed into domain types before it reaches a use case.
 6. **Translation is mechanical.** Mappers change shape and representation (names, units, formats, nullability) and make no business decisions. A branch that changes meaning is Policy and belongs in the core.
 7. **Edges are swappable.** Replacing the database with flat files or memory, or the UI with standard output, changes only translators and adapters. Core entities and use cases stay untouched and keep passing their tests.
+
+## Standard: Names Before Comments
+
+To prevent context sprawl, code explains itself through the names of its modules, classes, functions, and arguments. A comment is allowed only where good naming cannot carry the detail: a non-obvious reason, a constraint imposed from outside the code, or a workaround and its cause.
+
+1. **Rename before commenting.** If a comment restates what the code does, improve the names and delete the comment.
+2. **Explain why, never what.** A surviving comment records intent or context that the code cannot express.
+3. **No narration.** No change logs, authorship notes, or commented-out code. Version control holds history.
