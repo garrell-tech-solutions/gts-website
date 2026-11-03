@@ -7,6 +7,11 @@ interface Project {
 
 const projectsData: Project[] = [
   {
+    title: 'Plaza Promo',
+    description: `Deals from the shops in your local shopping plaza, so you can try every one of them for less.`,
+    href: 'https://plazapromo.com/',
+  },
+  {
     title: 'Splitbench',
     description: `Give it any topic. One AI argues for it, the other against, and neither is allowed to back down. A third AI judges who argued it better.`,
     imgSrc: '/static/images/splitbench-og.png',
