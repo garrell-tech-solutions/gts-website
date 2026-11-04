@@ -9,6 +9,7 @@ const projectsData: Project[] = [
   {
     title: 'Plaza Promo',
     description: `Deals from the shops in your local shopping plaza, so you can try every one of them for less.`,
+    imgSrc: '/static/images/plazapromo-og.png',
     href: 'https://plazapromo.com/',
   },
   {
