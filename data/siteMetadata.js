@@ -47,9 +47,9 @@ const siteMetadata = {
     // posthogAnalytics: {
     //   posthogProjectApiKey: '', // e.g. 123e4567-e89b-12d3-a456-426614174000
     // },
-    // googleAnalytics: {
-    //   googleAnalyticsId: '', // e.g. G-XXXXXXX
-    // },
+    ...(process.env.NEXT_GOOGLE_ANALYTICS_ID && {
+      googleAnalytics: { googleAnalyticsId: process.env.NEXT_GOOGLE_ANALYTICS_ID },
+    }),
   },
   newsletter: {
     // supports mailchimp, buttondown, convertkit, klaviyo, revue, emailoctopus, beehive
