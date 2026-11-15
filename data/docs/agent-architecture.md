@@ -1,8 +1,8 @@
 ---
 title: Agent Architecture Standards
-summary: The architectural standards Garrell Tech Solutions applies to every codebase, written for retrieval by coding agents. Covers abstracted set operations, one owner per rule, core entities with boundary translation, and minimal comments.
+summary: The architectural standards Garrell Tech Solutions applies to every codebase, written for retrieval by coding agents. Covers abstracted set operations, one owner per rule, core entities with boundary translation, packages named for the business, and minimal comments.
 date: '2026-08-21'
-lastmod: '2026-10-08'
+lastmod: '2026-11-15'
 ---
 
 ## Scope
@@ -106,6 +106,40 @@ Core business entities sit at the center of the system and know nothing about ho
 5. **No entities at the edge.** Output receives purpose-built view models or DTOs, never entities. Input is parsed into domain types before it reaches a use case.
 6. **Translation is mechanical.** Mappers change shape and representation (names, units, formats, nullability) and make no business decisions. A branch that changes meaning is Policy and belongs in the core.
 7. **Edges are swappable.** Replacing the database with flat files or memory, or the UI with standard output, changes only translators and adapters. Core entities and use cases stay untouched and keep passing their tests.
+
+## Standard: Packages Name the Business
+
+### 1. Principle: the source tree says what the system does
+
+Opening the source root should tell a reader what the system does before it tells them how it is built. Top-level packages (crates, workspace packages, modules, or folders, whatever unit the toolchain builds and checks) are named for business domains, in the words the product and its users already use. Technology is grouped one level down.
+
+### 2. The shape
+
+| Package       | Holds                                                                                                      | Named for                 | Must not                                                      |
+| ------------- | ---------------------------------------------------------------------------------------------------------- | ------------------------- | ------------------------------------------------------------- |
+| Domain        | One business domain's entities, policy, ports, and use cases                                               | The business concept      | Perform I/O, depend on an adapter, or join a dependency cycle |
+| Shared kernel | The few types several domains need and none owns: identifiers, the clock, error kinds, general value types | Its role (`kernel`)       | Hold a rule that belongs to one domain                        |
+| Adapter       | The translation and effects for one external system or technology                                          | The technology            | Hold policy, or reach a domain it does not serve              |
+| Composition   | The entry points that wire domains to adapters for one runtime                                             | The runtime or executable | Hold policy                                                   |
+
+A layout that follows the shape:
+
+```
+src/
+  billing/  invoices/  scheduling/  kernel/
+  adapters/  postgres/  stripe/  http/
+  apps/      api/  worker/  cli/
+```
+
+### 3. Strict invariants
+
+1. **Domains at the top.** The first listing of the source root names business domains. Layer names (`core`, `domain`, `application`, `infrastructure`) are never the top-level grouping, because they describe the architecture instead of the business.
+2. **A domain owns its ports and use cases.** A domain's ports and use cases live in its package. A shared `ports` or `use_cases` module that every domain adds to is a hub, and a violation.
+3. **The build enforces domain edges.** Domains depend on each other in one direction only, with no cycles. Use a packaging unit the toolchain can check, and have CI check each package's dependencies against a declared allow-list, as in One Owner per Rule.
+4. **Adapters split by technology, not by domain.** One adapter per external system, depending only on the domains it serves. Splitting an adapter again per domain multiplies packages without adding a rule the adapter could not already hold.
+5. **A domain never contains its adapters.** Bundling a domain with its storage or API code into one vertical slice puts I/O in the domain, against Core Entities and Boundary Translation.
+6. **The kernel stays small and rule-free.** A type moves into the kernel only when two or more domains need it and it carries no domain's rules. A general type left in one domain (a text or page type, say) creates a false dependency on that domain, so move it.
+7. **Split when the second domain arrives.** A service with one domain needs no kernel and no split. Packaging follows the domains the system actually has, not the ones it might grow.
 
 ## Standard: Names Before Comments
 
